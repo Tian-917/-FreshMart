@@ -1,0 +1,16 @@
+/* 拒单参数 */
+package com.freshmart.dto;
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class OrderRejectDTO implements Serializable {
+
+    private Long id;
+
+    //订单拒绝原因
+    private String rejectionReason;
+
+}

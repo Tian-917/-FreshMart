@@ -1,0 +1,23 @@
+/* 销售额报表返回结果 */
+package com.freshmart.vo;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class GmvReportVO implements Serializable {
+
+    //日期，以逗号分隔，例如：2022-10-01,2022-10-02,2022-10-03
+    private String dateList;
+
+    //销售额，以逗号分隔，例如：406.0,1520.0,75.0
+    private String gmvList;
+
+}

@@ -1,0 +1,15 @@
+/* 支付参数 */
+package com.freshmart.dto;
+
+import lombok.Data;
+import java.io.Serializable;
+
+@Data
+public class OrderPaymentDTO implements Serializable {
+    //订单号
+    private String orderNumber;
+
+    //付款方式
+    private Integer payMethod;
+
+}
