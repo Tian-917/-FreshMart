@@ -1,0 +1,23 @@
+# 本地开发环境配置（敏感信息一律走环境变量，不落库）
+freshmart:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: ${FRESHMART_DB_HOST:localhost}
+    port: ${FRESHMART_DB_PORT:3306}
+    database: ${FRESHMART_DB_NAME:freshmart}
+    username: ${FRESHMART_DB_USERNAME:root}
+    password: ${FRESHMART_DB_PASSWORD:******}
+  alioss:
+    endpoint: ${FRESHMART_OSS_ENDPOINT:oss-cn-beijing.aliyuncs.com}
+    access-key-id: ${FRESHMART_OSS_ACCESS_KEY_ID:}
+    access-key-secret: ${FRESHMART_OSS_ACCESS_KEY_SECRET:}
+    bucket-name: ${FRESHMART_OSS_BUCKET:}
+  redis:
+    host: ${FRESHMART_REDIS_HOST:localhost}
+    port: ${FRESHMART_REDIS_PORT:6379}
+    database: ${FRESHMART_REDIS_DATABASE:7}
+  wechat:
+    appid: ${FRESHMART_WX_APPID:}
+    secret: ${FRESHMART_WX_SECRET:}
+    # 本地开发：没有小程序 AppID/Secret 时置 true，跳过微信 code2session 直接登录（生产必须 false）
+    dev-login: ${FRESHMART_WX_DEV_LOGIN:true}

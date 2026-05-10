@@ -1,0 +1,62 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${freshmart.datasource.driver-class-name}
+      url: jdbc:mysql://${freshmart.datasource.host}:${freshmart.datasource.port}/${freshmart.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${freshmart.datasource.username}
+      password: ${freshmart.datasource.password}
+  redis:
+    host: ${freshmart.redis.host}
+    port: ${freshmart.redis.port}
+    database: ${freshmart.redis.database}
+
+mybatis-plus:
+  #开启驼峰命名（MyBatis-Plus 默认开启，此处显式声明）
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      #主键自增策略
+      id-type: auto
+
+logging:
+  level:
+    com:
+      freshmart:
+        mapper: debug
+        service: info
+        controller: info
+
+freshmart:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: ${FRESHMART_JWT_ADMIN_SECRET:******}
+    # 设置jwt过期时间
+    admin-ttl: 7200000000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+    user-secret-key: ${FRESHMART_JWT_USER_SECRET:******}
+    user-ttl: 7200000000
+    user-token-name: authentication
+  alioss:
+    endpoint: ${freshmart.alioss.endpoint}
+    access-key-id: ${freshmart.alioss.access-key-id}
+    access-key-secret: ${freshmart.alioss.access-key-secret}
+    region: ${freshmart.alioss.region}
+  wechat:
+    appid: ${freshmart.wechat.appid}
+    secret: ${freshmart.wechat.secret}
+#    mchid : ${freshmart.wechat.mchid}
+#    mchSerialNo: ${freshmart.wechat.mchSerialNo}
+#    privateKeyFilePath: ${freshmart.wechat.privateKeyFilePath}
+#    apiV3Key: ${freshmart.wechat.apiV3Key}
+#    weChatPayCertFilePath: ${freshmart.wechat.weChatPayCertFilePath}
+#    notifyUrl: ${freshmart.wechat.notifyUrl}
+#    refundNotifyUrl: ${freshmart.wechat.refundNotifyUrl}
