@@ -1,0 +1,42 @@
+// 我的页结构
+<view class="page">
+  <view class="profile">
+    <image class="avatar" src="/static/icons/veg.png" mode="aspectFit" />
+    <view>
+      <view style="color:#fff; font-size: 34rpx; font-weight: 700;">{{member.name || '鲜达会员'}}</view>
+      <view style="color: rgba(255,255,255,0.85); font-size: 24rpx; margin-top: 8rpx;">
+        会员 ID {{member.id || '—'}} · 免配送费特权
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="between" bindtap="goOrders">
+      <view>我的订单</view>
+      <view class="muted">查看全部 ›</view>
+    </view>
+    <view class="between mt24" bindtap="goAddress">
+      <view>收货地址</view>
+      <view class="muted">管理 ›</view>
+    </view>
+    <view class="between mt24" bindtap="goIndex">
+      <view>继续逛逛</view>
+      <view class="muted">去首页 ›</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="between" bindtap="onRelogin">
+      <view>重新登录</view>
+      <view class="muted">切换会员 ›</view>
+    </view>
+    <view class="between mt24" bindtap="onAbout">
+      <view>关于本项目</view>
+      <view class="muted">›</view>
+    </view>
+  </view>
+
+  <view class="muted" style="text-align:center; margin-top: 40rpx;">
+    鲜达超市 · 线上生鲜超市 Demo
+  </view>
+</view>

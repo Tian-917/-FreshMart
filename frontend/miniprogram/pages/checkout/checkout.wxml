@@ -1,0 +1,61 @@
+// 结算页结构
+<view class="page">
+  <!-- 地址 -->
+  <view class="card" bindtap="chooseAddress">
+    <view wx:if="{{address}}" class="between">
+      <view>
+        <view class="bold">{{address.consignee}} {{address.phone}}</view>
+        <view class="muted mt8">{{address.cityName}}{{address.districtName}}{{address.detail}}</view>
+      </view>
+      <view class="muted">切换 ›</view>
+    </view>
+    <view wx:else class="between">
+      <view class="muted">还没有收货地址，点击添加</view>
+      <view class="muted">›</view>
+    </view>
+  </view>
+
+  <!-- 商品 -->
+  <view class="card">
+    <view class="bold">商品清单</view>
+    <view class="order-goods" wx:for="{{carts}}" wx:key="id">
+      <image class="order-goods-img" src="{{item.image}}" mode="aspectFill" />
+      <view style="flex:1;">
+        <view class="between">
+          <view>{{item.name}}</view>
+          <view>¥{{item.subtotal}}</view>
+        </view>
+        <view class="muted mt8">
+          <text wx:if="{{item.specText}}">规格：{{item.specText}} · </text>×{{item.number}}
+        </view>
+      </view>
+    </view>
+    <view class="between mt24" style="border-top: 1rpx solid #EEF2EF; padding-top: 20rpx;">
+      <view class="muted">配送费</view>
+      <view class="muted">免配送费</view>
+    </view>
+  </view>
+
+  <!-- 备注 -->
+  <view class="card">
+    <view class="bold">订单备注</view>
+    <textarea
+      class="input mt8"
+      style="height: 120rpx; width: auto;"
+      placeholder="口味、送达时间、放门口等"
+      maxlength="100"
+      bindinput="onRemark"
+      value="{{remark}}"
+    />
+  </view>
+
+  <view style="height: 160rpx;"></view>
+
+  <view class="total-bar">
+    <view>
+      <view class="cart-bar-sub" style="color:#7A8B80;">实付</view>
+      <view class="price">¥{{total}}</view>
+    </view>
+    <view class="btn btn-primary" bindtap="onSubmit">提交订单</view>
+  </view>
+</view>

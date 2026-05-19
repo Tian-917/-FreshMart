@@ -1,0 +1,65 @@
+// 首页结构
+<view class="page">
+  <!-- 门店状态 -->
+  <view class="store-bar">
+    <view>
+      <view class="store-name">鲜达超市 · 望京店</view>
+      <view style="font-size: 22rpx; opacity: 0.9;">30 分钟达 · 满 39 免配送费</view>
+    </view>
+    <view class="store-status">{{storeStatus === 1 ? '营业中' : '休息中'}}</view>
+  </view>
+
+  <!-- 类目 -->
+  <scroll-view class="cat-scroll" scroll-x enable-flex>
+    <view
+      wx:for="{{categories}}"
+      wx:key="id"
+      class="cat-item {{activeId === item.id ? 'active' : ''}}"
+      data-id="{{item.id}}"
+      bindtap="onSelectCategory"
+    >{{item.name}}</view>
+  </scroll-view>
+
+  <!-- 商品 -->
+  <view wx:if="{{products.length}}" class="goods-grid">
+    <view
+      class="goods-card"
+      wx:for="{{products}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="goProduct"
+    >
+      <image class="goods-img" src="{{item.image}}" mode="aspectFill" lazy-load />
+      <view class="goods-body">
+        <view class="goods-name">{{item.name}}</view>
+        <view class="goods-desc">{{item.description}}</view>
+        <view wx:if="{{item.lowStock}}" class="stock-tip">仅剩 {{item.stock}} 件</view>
+        <view class="between mt8">
+          <view class="price">¥{{item.priceText}}</view>
+          <view
+            wx:if="{{item.soldOut}}"
+            class="add-btn disabled"
+            catchtap="onAdd"
+            data-id="{{item.id}}"
+            data-soldout="1"
+          >售罄</view>
+          <view wx:else class="add-btn" catchtap="onAdd" data-id="{{item.id}}">+</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:elif="{{!loading}}" class="empty">
+    <image class="empty-img" src="/static/icons/all.png" mode="aspectFit" />
+    <view>这个类目还没上货</view>
+  </view>
+
+  <!-- 底部购物车条 -->
+  <view class="cart-bar" bindtap="goCart">
+    <view>
+      <view class="cart-bar-total">¥{{cartTotal}}</view>
+      <view class="cart-bar-sub">已选 {{cartCount}} 件</view>
+    </view>
+    <view class="cart-bar-btn" catchtap="goCheckout">去结算</view>
+  </view>
+</view>

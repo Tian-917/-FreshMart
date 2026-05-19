@@ -1,0 +1,66 @@
+// 商品详情结构
+<view class="page" wx:if="{{product}}">
+  <image class="hero" src="{{product.image}}" mode="aspectFill" />
+
+  <view class="card">
+    <view class="between">
+      <view class="goods-name" style="font-size: 36rpx;">{{product.name}}</view>
+      <view class="price">¥{{priceText}}</view>
+    </view>
+    <view class="muted mt8">{{product.description}}</view>
+    <view class="row mt16">
+      <view class="tag tag-green">门店现拣</view>
+      <view class="tag tag-orange" style="margin-left: 12rpx;">30 分钟达</view>
+      <view class="tag" style="margin-left: 12rpx;">坏果包赔</view>
+    </view>
+    <view class="mt16" wx:if="{{!soldOut}}">
+      <text class="muted">库存 {{stock}} 件</text>
+      <text wx:if="{{stock <= 10}}" class="stock-tip" style="margin-left: 12rpx;">仅剩 {{stock}} 件，下单要快</text>
+    </view>
+    <view class="mt16" wx:else>
+      <text class="stock-tip">今日已售罄，明早 8 点上新</text>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{specGroups.length}}">
+    <view wx:for="{{specGroups}}" wx:key="name" class="form-item">
+      <view class="form-label">{{item.name}}</view>
+      <view class="spec-chips">
+        <view
+          wx:for="{{item.options}}"
+          wx:for-item="opt"
+          wx:key="*this"
+          class="chip {{selected[item.name] === opt ? 'active' : ''}}"
+          data-group="{{item.name}}"
+          data-value="{{opt}}"
+          bindtap="onPickSpec"
+        >{{opt}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="form-label">商品说明</view>
+    <view class="muted mt8">下单后由门店拣货打包，支持货到付款与在线支付。如遇缺货，店员会电话联系替换或退差价。</view>
+  </view>
+
+  <view style="height: 140rpx;"></view>
+
+  <view class="total-bar">
+    <view>
+      <view class="cart-bar-sub" style="color: #7A8B80;">合计</view>
+      <view class="price">¥{{priceText}}</view>
+    </view>
+    <view class="row">
+      <view class="btn btn-plain btn-sm" bindtap="goCart">去购物车</view>
+      <view
+        wx:if="{{soldOut}}"
+        class="btn btn-plain btn-sm"
+        style="margin-left: 16rpx;"
+      >已售罄</view>
+      <view wx:else class="btn btn-primary" style="margin-left: 16rpx;" bindtap="onAdd">加入购物车</view>
+    </view>
+  </view>
+</view>
+
+<view wx:elif="{{!loading}}" class="empty">商品不存在或已下架</view>

@@ -1,0 +1,44 @@
+// 订单详情结构
+<view class="page" wx:if="{{order}}">
+  <view class="card" style="background: linear-gradient(135deg,#2E9E5B,#4CB977);">
+    <view style="color:#fff; font-size: 36rpx; font-weight: 700;">{{order.statusText}}</view>
+    <view style="color: rgba(255,255,255,0.9); font-size: 24rpx; margin-top: 10rpx;">
+      单号 {{order.number}} · 下单 {{order.orderTime}}
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="bold">商品</view>
+    <view class="order-goods" wx:for="{{items}}" wx:key="id">
+      <image class="order-goods-img" src="{{item.image}}" mode="aspectFill" />
+      <view style="flex:1;">
+        <view class="between">
+          <view>{{item.name}}</view>
+          <view>¥{{item.amountText}}</view>
+        </view>
+        <view class="muted mt8">
+          <text wx:if="{{item.specText}}">规格：{{item.specText}} · </text>×{{item.number}}
+        </view>
+      </view>
+    </view>
+    <view class="between mt24" style="border-top:1rpx solid #EEF2EF; padding-top:20rpx;">
+      <view class="bold">实付</view>
+      <view class="price">¥{{order.amountText}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="bold">收货信息</view>
+    <view class="muted mt8">{{order.consignee}} {{order.phone}}</view>
+    <view class="muted mt8">{{order.address}}</view>
+    <view class="muted mt8" wx:if="{{order.remark}}">备注：{{order.remark}}</view>
+    <view class="muted mt8" wx:if="{{order.estimatedDeliveryTime}}">预计送达：{{order.estimatedDeliveryTime}}</view>
+    <view class="muted mt8" wx:if="{{order.deliveryTime}}">送达时间：{{order.deliveryTime}}</view>
+    <view class="muted mt8" wx:if="{{order.cancelReason}}">取消原因：{{order.cancelReason}}</view>
+  </view>
+
+  <view class="card row" style="justify-content: flex-end;">
+    <view class="btn btn-ghost btn-sm" wx:if="{{order.status >= 2 && order.status <= 4}}" bindtap="onReminder">催单</view>
+    <view class="btn btn-primary btn-sm" style="margin-left: 16rpx;" bindtap="onRepeat">再来一单</view>
+  </view>
+</view>

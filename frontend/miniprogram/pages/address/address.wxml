@@ -1,0 +1,67 @@
+// 收货地址结构
+<view class="page">
+  <view class="card" wx:for="{{list}}" wx:key="id" bindtap="onPick" data-index="{{index}}">
+    <view class="between">
+      <view>
+        <view class="bold">
+          {{item.consignee}}
+          <text class="tag {{item.isDefault ? 'tag-green' : 'tag-gray'}}" style="margin-left: 12rpx;">
+            {{item.isDefault ? '默认' : item.label}}
+          </text>
+        </view>
+        <view class="muted mt8">{{item.phone}}</view>
+        <view class="muted mt8">{{item.cityName}}{{item.districtName}}{{item.detail}}</view>
+      </view>
+      <view wx:if="{{selectMode}}" class="muted">选择 ›</view>
+    </view>
+    <view class="row mt16" style="justify-content: flex-end;">
+      <view class="btn btn-plain btn-sm" data-index="{{index}}" catchtap="onDefault">设为默认</view>
+      <view class="btn btn-plain btn-sm" style="margin-left: 16rpx;" data-index="{{index}}" catchtap="openEdit">编辑</view>
+      <view class="btn btn-plain btn-sm" style="margin-left: 16rpx;" data-index="{{index}}" catchtap="onDelete">删除</view>
+    </view>
+  </view>
+
+  <view wx:if="{{!list.length}}" class="empty">还没有收货地址</view>
+
+  <view class="total-bar">
+    <view class="muted">{{selectMode ? '选择一个收货地址' : '共 ' + list.length + ' 条地址'}}</view>
+    <view class="btn btn-primary" bindtap="openAdd">新增地址</view>
+  </view>
+
+  <!-- 新增 / 编辑表单 -->
+  <view wx:if="{{showForm}}" class="mask">
+    <view class="sheet">
+      <view class="between">
+        <view class="bold">{{form.id ? '编辑地址' : '新增地址'}}</view>
+        <view class="muted" bindtap="closeForm">关闭</view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">收货人</view>
+        <input class="input" placeholder="姓名" value="{{form.consignee}}" data-field="consignee" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <view class="form-label">手机号</view>
+        <input class="input" type="number" placeholder="11 位手机号" value="{{form.phone}}" data-field="phone" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <view class="form-label">城市</view>
+        <input class="input" value="{{form.cityName}}" data-field="cityName" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <view class="form-label">区县</view>
+        <input class="input" value="{{form.districtName}}" data-field="districtName" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <view class="form-label">详细地址</view>
+        <input class="input" placeholder="街道、门牌号" value="{{form.detail}}" data-field="detail" bindinput="onInput" />
+      </view>
+      <view class="form-item">
+        <view class="form-label">标签</view>
+        <input class="input" placeholder="家 / 公司 / 学校" value="{{form.label}}" data-field="label" bindinput="onInput" />
+      </view>
+
+      <view class="btn btn-primary mt24" bindtap="onSave">保存</view>
+    </view>
+  </view>
+</view>

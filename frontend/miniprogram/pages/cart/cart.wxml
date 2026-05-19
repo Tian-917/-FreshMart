@@ -1,0 +1,45 @@
+// 购物车结构
+<view class="page">
+  <view wx:if="{{carts.length}}">
+    <view class="between" style="padding: 24rpx 32rpx 0;">
+      <view class="bold">共 {{count}} 件</view>
+      <view class="muted" bindtap="onClean">清空购物车</view>
+    </view>
+
+    <view class="card" wx:for="{{carts}}" wx:key="id">
+      <view class="row">
+        <image class="order-goods-img" src="{{item.image}}" mode="aspectFill" />
+        <view style="flex: 1;">
+          <view class="between">
+            <view class="goods-name">{{item.name}}</view>
+            <view class="price-s">¥{{item.amountText}}</view>
+          </view>
+          <view class="muted mt8" wx:if="{{item.specText}}">规格：{{item.specText}}</view>
+          <view class="between mt16">
+            <view class="muted">小计 ¥{{item.subtotal}}</view>
+            <view class="row">
+              <view class="add-btn" style="background:#F1F5F2;color:#5E6F64;" data-index="{{index}}" bindtap="onMinus">−</view>
+              <view style="width: 72rpx; text-align: center;">{{item.number}}</view>
+              <view class="add-btn" data-index="{{index}}" bindtap="onPlus">+</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view style="height: 160rpx;"></view>
+    <view class="total-bar">
+      <view>
+        <view class="cart-bar-sub" style="color:#7A8B80;">合计</view>
+        <view class="price">¥{{total}}</view>
+      </view>
+      <view class="btn btn-primary" bindtap="goCheckout">去结算</view>
+    </view>
+  </view>
+
+  <view wx:else class="empty">
+    <image class="empty-img" src="/static/icons/bundle.png" mode="aspectFit" />
+    <view>购物车还空着</view>
+    <view class="btn btn-ghost mt24" style="display:inline-block;" bindtap="goIndex">去逛逛</view>
+  </view>
+</view>

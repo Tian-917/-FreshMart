@@ -1,0 +1,32 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/product/product",
+    "pages/cart/cart",
+    "pages/checkout/checkout",
+    "pages/orders/orders",
+    "pages/orderDetail/orderDetail",
+    "pages/address/address",
+    "pages/mine/mine"
+  ],
+  "window": {
+    "navigationBarTitleText": "鲜达超市",
+    "navigationBarBackgroundColor": "#2E9E5B",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F6F8F6"
+  },
+  "tabBar": {
+    "color": "#8A9A90",
+    "selectedColor": "#2E9E5B",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "首页" },
+      { "pagePath": "pages/cart/cart", "text": "购物车" },
+      { "pagePath": "pages/orders/orders", "text": "订单" },
+      { "pagePath": "pages/mine/mine", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
